@@ -1,0 +1,9 @@
+Who are the most popular article authors of all time?
+"Ursula La Multa"-6710940views
+"Rudolf von Treppenwitz"-3355470views
+"Anonymous Contributor"-1677735views
+"Markoff Chaney"-1677735views
+
+What are the most popular articles of all time?
+
+On which days did more than 1'%' of requests lead to errors?
