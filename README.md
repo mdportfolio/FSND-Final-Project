@@ -6,7 +6,7 @@ This is my final project for Udacity's Intro to Programming course.
 * Vagrant installed 
 * Virtual box for Windows installed 
 
-####How to run the program on Windows:
+#### How to run the program on Windows:
 1. Access git on your computer.
 2. Change directories `cd` command
 3. When you reach the folder with the Vagrant file, put the `vagrant up` command.
