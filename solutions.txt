@@ -10,3 +10,4 @@ What are the most popular articles of all time?
  "Bad things gone, say good people"-170098 views
 
 On which days did more than 1'%' of requests lead to errors?
+July 1, 2016 - 1% error
