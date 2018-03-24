@@ -26,6 +26,15 @@ def articles_question():
 	print('"' + str(answer[2][0]) + '"' + '-'+ str(answer[2][1]) + "" +'views')
 	connect.close()	
 
+def error_question ():	
+	"""Prints the day with an error greater than 1%"""
+	connect = psycopg2.connect("dbname = news")
+	cursor = connect.cursor()
+	cursor.execute("""SELECT date_part('month', time) m, date_part('day', time) d, date_part('year',time) y, SUM(CASE status WHEN '200 OK' THEN 0 ELSE 1 END)/COUNT(status) AS percentage FROM log GROUP BY log.time HAVING SUM(CASE status WHEN '200 OK' THEN 0 ELSE 1 END)/COUNT(status) > 0.01 ORDER BY d;""")
+	answer = cursor.fetchall()
+	print('On which days did more than 1%' + " " +'of requests lead to errors?')	
+	result = answer[0]
+	
 authors_question()
 articles_question()
 error_question ()
