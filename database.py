@@ -1,5 +1,5 @@
+#! /usr/bin/env python
 import psycopg2
-import time
 
 
 def authors_question():
@@ -8,19 +8,15 @@ def authors_question():
 
     connect = psycopg2.connect("dbname = news ")
     cursor = connect.cursor()
-    cursor.execute("""SELECT name, COUNT(status) AS views FROM authors, log, articles
-    WHERE articles.author = authors.id
-    GROUP BY authors.id ORDER BY views DESC;""")
+    cursor.execute("""SELECT authors.name, COUNT(*) AS views
+    FROM authors, log, articles
+    WHERE authors.id = articles.author and
+    log.path = concat('/article/', articles.slug)
+    GROUP BY authors.name ORDER BY views DESC;""")
     answer = cursor.fetchall()
     print('Who are the most popular article authors of all time?')
-    print(
-     '"' + str(answer[0][0]) + '"' + '-' + str(answer[0][1]) + " " + 'views')
-    print(
-     '"' + str(answer[1][0]) + '"' + '-' + str(answer[1][1]) + " " + 'views')
-    print(
-     '"' + str(answer[2][0]) + '"' + '-' + str(answer[2][1]) + " " + 'views')
-    print(
-     '"' + str(answer[3][0]) + '"' + '-' + str(answer[3][1]) + " " + 'views')
+    for (writer, count) in answer:
+        print ("{} - {} views".format(writer, count))
     connect.close()
 
 
@@ -36,12 +32,8 @@ def articles_question():
     ORDER BY views DESC LIMIT 3;""")
     answer = cursor.fetchall()
     print ('What are the most popular articles of all time?')
-    print (
-     '"' + str(answer[0][0]) + '"' + '-' + str(answer[0][1]) + " " + 'views')
-    print (
-     '"' + str(answer[1][0]) + '"' + '-' + str(answer[1][1]) + " " + 'views')
-    print (
-     '"' + str(answer[2][0]) + '"' + '-' + str(answer[2][1]) + " " + 'views')
+    for (writer, count) in answer:
+        print ("{} - {} views".format(writer, count))
     connect.close()
 
 
@@ -60,8 +52,9 @@ def error_question():
     answer = cursor.fetchall()
     print (
      'On which days did more than 1%' + " " + 'of requests lead to errors?')
-    result = answer[0]
-    print (time.strftime("%B %d, %Y", result))
+    results = list(set(answer))
+    for date in results:
+        print (date)
     connect.close()
 
 
