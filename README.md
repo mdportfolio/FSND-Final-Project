@@ -23,7 +23,7 @@ You should see the `vagrant@vagrant:` prompt. This means that you are in the VM.
 `python (python_file.py)`
 
 #### How to load the database:
-1.Download the FSND zip folder from the project instructions.
+1. Download the FSND zip folder from the project instructions.
 2. One of the file inside is called newsdata.sql. Extract the file into the vagrant directory, which is shared with your virtual machine.
 3. Start your Virtual Machine(VM)._(Refer to previous section.)_
 4. After you load the VM, you should see`vagrant@vagrant/vagrant:`
