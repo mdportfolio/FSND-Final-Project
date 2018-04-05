@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 import psycopg2
+from datetime import datetime
 
 
 def authors_question():
@@ -54,7 +55,7 @@ def error_question():
      'On which days did more than 1%' + " " + 'of requests lead to errors?')
     results = list(set(answer))
     for date in results:
-        print (date)
+        print ('{:%M-%d-%Y}'.format(datetime(date)))
     connect.close()
 
 
